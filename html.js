@@ -33,7 +33,7 @@ const html = ({ raw: literals }, ...expressions) => {
       ? expressions[i].join("")
       : expressions[i]?.toString() ?? "";
 
-    if (lit && lit.endsWith("!")) {
+    if (lit && lit[lit.length - 1] === "!") {
       lit = lit.slice(0, -1);
     } else if (str) {
       str = str.replace(escapeRegExp, (match) => escapeChars[match]);

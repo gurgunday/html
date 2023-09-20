@@ -21,9 +21,9 @@ const html = ({ raw: literals }, ...expressions) => {
       return "";
     case 1:
       return literals[0];
-    default:
-      --length;
   }
+
+  --length;
 
   let acc = "";
 

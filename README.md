@@ -10,7 +10,7 @@ npm i @gurgunday/html
 
 ## API Reference
 
-The package provides an `html` function that can be used to tag template literals and escape their expressions. To render an expression as raw HTML, prefix it with `!`.
+The package provides the `html` function that can be used to tag template literals and escape their expressions. To render an expression as raw HTML, prefix it with `!`.
 
 Node.js users also have access to the `includeFile` function that outputs the content of a given file and caches it in memory.
 

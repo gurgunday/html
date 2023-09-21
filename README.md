@@ -1,4 +1,4 @@
-Replace your template engine with pure JavaScript by leveraging the power of [Tagged Templates](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates).
+Replace your template engine with pure JavaScript by leveraging the power of [tagged templates](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates).
 
 Inspired by [html-template-tag](https://github.com/AntonioVdlC/html-template-tag).
 

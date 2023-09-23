@@ -1,9 +1,11 @@
 const stringify = (expression) =>
-  Array.isArray(expression)
+  typeof expression === "string"
+    ? expression
+    : Array.isArray(expression)
     ? expression.join("")
     : expression?.toString() ?? "";
 
-const escapeChars = {
+const escapeCharacters = {
   '"': "&quot;",
   "'": "&apos;",
   "&": "&amp;",
@@ -11,7 +13,10 @@ const escapeChars = {
   ">": "&gt;",
 };
 
-const escapeRegExp = new RegExp(`[${Object.keys(escapeChars).join("")}]`, "gv");
+const escapeRegExp = new RegExp(
+  `[${Object.keys(escapeCharacters).join("")}]`,
+  "gv",
+);
 
 /**
  * @param {{ raw: string[] }} literals
@@ -36,7 +41,7 @@ const html = ({ raw: literals }, ...expressions) => {
     if (lit && lit[lit.length - 1] === "!") {
       lit = lit.slice(0, -1);
     } else if (str) {
-      str = str.replace(escapeRegExp, (match) => escapeChars[match]);
+      str = str.replace(escapeRegExp, (match) => escapeRegExp[match]);
     }
 
     acc += lit += str;

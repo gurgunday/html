@@ -41,7 +41,7 @@ const html = ({ raw: literals }, ...expressions) => {
     if (lit && lit[lit.length - 1] === "!") {
       lit = lit.slice(0, -1);
     } else if (str) {
-      str = str.replace(escapeRegExp, (match) => escapeRegExp[match]);
+      str = str.replace(escapeRegExp, (match) => escapeCharacters[match]);
     }
 
     acc += lit += str;

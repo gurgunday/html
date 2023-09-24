@@ -1,10 +1,10 @@
 import { readFileSync } from "node:fs";
 
-const fileCache = new Map();
-
 const readOptions = {
   encoding: "utf8",
 };
+
+const fileCache = new Map();
 
 /**
  * @param {string} path

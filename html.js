@@ -1,10 +1,3 @@
-const stringify = (expression) =>
-  typeof expression === "string"
-    ? expression
-    : Array.isArray(expression)
-    ? expression.join("")
-    : expression?.toString() ?? "";
-
 const escapeCharacters = {
   '"': "&quot;",
   "'": "&apos;",
@@ -17,6 +10,13 @@ const escapeRegExp = new RegExp(
   `[${Object.keys(escapeCharacters).join("")}]`,
   "gv",
 );
+
+const stringify = (expression) =>
+  typeof expression === "string"
+    ? expression
+    : Array.isArray(expression)
+    ? expression.join("")
+    : expression?.toString() ?? "";
 
 /**
  * @param {{ raw: string[] }} literals

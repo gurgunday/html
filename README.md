@@ -42,7 +42,7 @@ console.log(rawHTML);
 // Output: <div><img src="https://example.com/hacker.png"></div>
 ```
 
-The `includeFile` function is used to output the content of a file. Again, remember that it also caches the result, so any subsequent modifications to the same file won't be reflected until the app is restarted:
+The `includeFile` function is used to output the content of a file. Again, remember that it also caches the result in memory, so any subsequent modifications to the same file won't be reflected until the app is restarted:
 
 ```js
 import { includeFile } from "@gurgunday/html/includeFile.js";

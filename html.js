@@ -20,7 +20,7 @@ const stringify = (expression) =>
 
 /**
  * @param {{ raw: string[] }} literals
- * @param  {...*} expressions
+ * @param {...*} expressions
  * @returns {string}
  */
 const html = ({ raw: literals }, ...expressions) => {

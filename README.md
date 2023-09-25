@@ -46,8 +46,8 @@ The `includeFile` function is used to output the content of a file. Again, remem
 
 ```js
 import { includeFile } from "@gurgunday/html/includeFile.js";
-const svgIcon = includeFile("src/static/logo.svg");
+const svgIcon = includeFile("static/logo.svg");
 
 console.log(svgIcon);
-// Output: content of "src/static/logo.svg"
+// Output: content of "static/logo.svg"
 ```

@@ -1,54 +1,62 @@
-const escapeDict = {
-  '"': "&quot;",
-  "'": "&apos;",
-  "&": "&amp;",
-  "<": "&lt;",
-  ">": "&gt;",
-};
+(() => {
+  "use strict";
 
-const escapeRegExp = new RegExp(`[${Object.keys(escapeDict).join("")}]`, "gv");
+  const escapeDict = {
+    '"': "&quot;",
+    "'": "&apos;",
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+  };
 
-const escapeReplacer = (key) => escapeDict[key];
+  const escapeRE = new RegExp(`[${Object.keys(escapeDict).join("")}]`, "gv");
 
-const stringify = (exp) =>
-  typeof exp === "string"
-    ? exp
-    : Array.isArray(exp)
-    ? exp.join("")
-    : exp?.toString() ?? "";
+  const escapeReplacer = (key) => escapeDict[key];
 
-/**
- * @param {{ raw: string[] }} literals
- * @param {...*} expressions
- * @returns {string}
- */
-const html = ({ raw: literals }, ...expressions) => {
-  switch (literals.length) {
-    case 0:
-      return "";
-    case 1:
-      return literals[0];
-  }
+  const stringify = (exp) =>
+    typeof exp === "string"
+      ? exp
+      : Array.isArray(exp)
+      ? exp.join("")
+      : exp?.toString() ?? "";
 
-  const lastLitIndex = literals.length - 1;
-  let acc = "";
-
-  for (let i = 0; i < lastLitIndex; ++i) {
-    let lit = literals[i];
-    let str = stringify(expressions[i]);
-
-    if (lit && lit[lit.length - 1] === "!") {
-      lit = lit.slice(0, -1);
-    } else if (str) {
-      str = str.replace(escapeRegExp, escapeReplacer);
+  /**
+   * @param {{ raw: string[] }} literals
+   * @param {...*} expressions
+   * @returns {string}
+   */
+  const html = ({ raw: literals }, ...expressions) => {
+    switch (literals.length) {
+      case 0:
+        return "";
+      case 1:
+        return literals[0];
     }
 
-    acc += lit += str;
+    const lastLitIndex = literals.length - 1;
+    let acc = "";
+
+    for (let i = 0; i < lastLitIndex; ++i) {
+      let lit = literals[i];
+      let str = stringify(expressions[i]);
+
+      if (lit && lit[lit.length - 1] === "!") {
+        lit = lit.slice(0, -1);
+      } else if (str) {
+        str = str.replace(escapeRE, escapeReplacer);
+      }
+
+      acc += lit += str;
+    }
+
+    acc += literals[lastLitIndex];
+
+    return acc;
+  };
+
+  if (typeof process === "object" && process?.versions?.node) {
+    module.exports.html = html;
+  } else {
+    globalThis.html = html;
   }
-
-  acc += literals[lastLitIndex];
-
-  return acc;
-};
-
-export { html };
+})();

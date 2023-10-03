@@ -2,7 +2,7 @@
   "name": "@gurgunday/html",
   "description": "Replace your template engine with fast JavaScript by leveraging the power of tagged templates.",
   "version": "5.10.5",
-  "type": "module",
+  "type": "commonjs",
   "main": "./html.js",
   "exports": {
     ".": "./html.js",

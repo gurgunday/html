@@ -1,4 +1,6 @@
-import { readFileSync } from "node:fs";
+"use strict";
+
+const { readFileSync } = require("node:fs");
 
 const readFileSyncOpts = { encoding: "utf-8" };
 
@@ -19,4 +21,4 @@ const includeFile = (path) => {
   return file;
 };
 
-export { includeFile };
+module.exports.includeFile = includeFile;

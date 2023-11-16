@@ -13,9 +13,11 @@ const escapeReplacer = (key) => escapeDict[key];
 const stringify = (exp) =>
   typeof exp === "string"
     ? exp
+    : exp == null
+    ? ""
     : Array.isArray(exp)
     ? exp.join("")
-    : exp?.toString() ?? "";
+    : `${exp}`;
 
 /**
  * @param {{ raw: string[] }} literals

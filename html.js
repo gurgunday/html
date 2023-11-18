@@ -17,10 +17,12 @@ const escapeReplacer = (key) => escapeDict[key];
  */
 const html = ({ raw: literals }, ...expressions) => {
   switch (literals.length) {
-    case 0:
+    case 0: {
       return "";
-    case 1:
+    }
+    case 1: {
       return literals[0];
+    }
   }
 
   const lastLitIndex = literals.length - 1;
@@ -32,10 +34,10 @@ const html = ({ raw: literals }, ...expressions) => {
       typeof expressions[i] === "string"
         ? expressions[i]
         : null == expressions[i]
-        ? ""
-        : Array.isArray(expressions[i])
-        ? expressions[i].join("")
-        : `${expressions[i]}`;
+          ? ""
+          : Array.isArray(expressions[i])
+            ? expressions[i].join("")
+            : `${expressions[i]}`;
 
     if (lit.length !== 0 && lit.charAt(lit.length - 1) === "!") {
       lit = lit.slice(0, -1);

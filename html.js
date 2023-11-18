@@ -31,7 +31,7 @@ const html = ({ raw: literals }, ...expressions) => {
     let str =
       typeof expressions[i] === "string"
         ? expressions[i]
-        : expressions[i] == undefined
+        : null == expressions[i]
         ? ""
         : Array.isArray(expressions[i])
         ? expressions[i].join("")

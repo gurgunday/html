@@ -17,12 +17,10 @@ const escapeReplacer = (key) => escapeDict[key];
  */
 const html = ({ raw: literals }, ...expressions) => {
   switch (literals.length) {
-    case 0: {
+    case 0:
       return "";
-    }
-    case 1: {
+    case 1:
       return literals[0];
-    }
   }
 
   const lastLitIndex = literals.length - 1;

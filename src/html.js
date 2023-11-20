@@ -31,7 +31,7 @@ const html = ({ raw: literals }, ...expressions) => {
 
   for (let i = 0; i < lastLitIndex; ++i) {
     let lit = literals[i];
-    let str =
+    let exp =
       typeof expressions[i] === "string"
         ? expressions[i]
         : null == expressions[i]
@@ -42,10 +42,10 @@ const html = ({ raw: literals }, ...expressions) => {
 
     if (lit.length !== 0 && lit.charAt(lit.length - 1) === "!")
       lit = lit.slice(0, -1);
-    else if (str.length !== 0)
-      str = str.replace(escapeRegExp, escapeReplacerFunction);
+    else if (exp.length !== 0)
+      exp = exp.replace(escapeRegExp, escapeReplacerFunction);
 
-    acc += lit += str;
+    acc += lit += exp;
   }
 
   acc += literals[lastLitIndex];

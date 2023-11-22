@@ -11,7 +11,7 @@ const escapeRegExp = new RegExp(
   "gv",
 );
 
-const escapeReplacerFunction = (key) => escapeDictionary[key];
+const escapeFunction = (key) => escapeDictionary[key];
 
 /**
  * @param {{ raw: string[] }} literals
@@ -37,7 +37,7 @@ const html = (literals, ...expressions) => {
     if (lit.length !== 0 && lit.charAt(lit.length - 1) === "!")
       lit = lit.slice(0, -1);
     else if (exp.length !== 0)
-      exp = exp.replace(escapeRegExp, escapeReplacerFunction);
+      exp = exp.replace(escapeRegExp, escapeFunction);
 
     acc += lit += exp;
   }

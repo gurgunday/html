@@ -30,7 +30,7 @@ const html = ({ raw: literals }, ...expressions) => {
         ? expressions[i]
         : null == expressions[i]
           ? ""
-          : Array.isArray(expressions[i])
+          : Array.isArray(expressions[i]) === true
             ? expressions[i].join("")
             : `${expressions[i]}`;
 

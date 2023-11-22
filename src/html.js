@@ -20,6 +20,7 @@ const escapeFunction = (key) => escapeDictionary[key];
  */
 const html = ({ raw: literals }, ...expressions) => {
   if (!literals.length) return "";
+
   const lastLitI = literals.length - 1;
   let acc = "";
 
@@ -34,10 +35,11 @@ const html = ({ raw: literals }, ...expressions) => {
             ? expressions[i].join("")
             : `${expressions[i]}`;
 
-    if (lit.length && lit.charAt(lit.length - 1) === "!")
+    if (lit.length && lit.charAt(lit.length - 1) === "!") {
       lit = lit.slice(0, -1);
-    else if (exp.length)
+    } else if (exp.length) {
       exp = exp.replace(escapeRegExp, escapeFunction);
+    }
 
     acc += lit += exp;
   }

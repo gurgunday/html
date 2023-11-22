@@ -8,7 +8,7 @@ const escapeDictionary = {
 
 const escapeRegExp = new RegExp(
   `[${Object.keys(escapeDictionary).join("")}]`,
-  "gv"
+  "gv",
 );
 
 const escapeFunction = (key) => escapeDictionary[key];
@@ -30,10 +30,10 @@ const html = ({ raw: literals }, ...expressions) => {
       typeof expressions[i] === "string"
         ? expressions[i]
         : expressions[i] == null
-        ? ""
-        : Array.isArray(expressions[i])
-        ? expressions[i].join("")
-        : `${expressions[i]}`;
+          ? ""
+          : Array.isArray(expressions[i])
+            ? expressions[i].join("")
+            : `${expressions[i]}`;
 
     if (lit.length && lit.charAt(lit.length - 1) === "!") {
       lit = lit.slice(0, -1);

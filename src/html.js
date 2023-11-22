@@ -26,10 +26,10 @@ const html = ({ raw: literals }, ...expressions) => {
       return literals[0];
   }
 
-  const lastLitIndex = literals.length - 1;
+  const lastLitI = literals.length - 1;
   let acc = "";
 
-  for (let i = 0; i < lastLitIndex; ++i) {
+  for (let i = 0; i < lastLitI; ++i) {
     let lit = literals[i];
     let exp =
       typeof expressions[i] === "string"
@@ -48,7 +48,7 @@ const html = ({ raw: literals }, ...expressions) => {
     acc += lit += exp;
   }
 
-  acc += literals[lastLitIndex];
+  acc += literals[lastLitI];
 
   return acc;
 };

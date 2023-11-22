@@ -18,13 +18,13 @@ const escapeFunction = (key) => escapeDictionary[key];
  * @param {...*} expressions
  * @returns {string}
  */
-const html = (literals, ...expressions) => {
-  if (literals.raw.length === 0) return "";
-  const lastLitI = literals.raw.length - 1;
+const html = ({ raw: literals }, ...expressions) => {
+  if (literals.length === 0) return "";
+  const lastLitI = literals.length - 1;
   let acc = "";
 
   for (let i = 0; i < lastLitI; ++i) {
-    let lit = literals.raw[i];
+    let lit = literals[i];
     let exp =
       typeof expressions[i] === "string"
         ? expressions[i]
@@ -42,7 +42,7 @@ const html = (literals, ...expressions) => {
     acc += lit += exp;
   }
 
-  acc += literals.raw[lastLitI];
+  acc += literals[lastLitI];
 
   return acc;
 };

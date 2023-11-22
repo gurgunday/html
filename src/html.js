@@ -29,7 +29,7 @@ const html = ({ raw: literals }, ...expressions) => {
     let exp =
       typeof expressions[i] === "string"
         ? expressions[i]
-        : null == expressions[i]
+        : expressions[i] == null
           ? ""
           : Array.isArray(expressions[i])
             ? expressions[i].join("")
@@ -48,5 +48,7 @@ const html = ({ raw: literals }, ...expressions) => {
 
   return acc;
 };
+
+html`1${2}3`
 
 export { html };

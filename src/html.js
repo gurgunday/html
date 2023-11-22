@@ -19,13 +19,7 @@ const escapeReplacerFunction = (key) => escapeDictionary[key];
  * @returns {string}
  */
 const html = (literals, ...expressions) => {
-  switch (literals.raw.length) {
-    case 0:
-      return "";
-    case 1:
-      return literals.raw[0];
-  }
-
+  if (literals.raw.length === 0) return ""
   const lastLitI = literals.raw.length - 1;
   let acc = "";
 

@@ -34,13 +34,12 @@ const html = ({ raw: literals }, ...expressions) => {
         break;
       case "undefined":
         break;
-      case "object":
+      default:
         if (expressions[i] === null) break;
         if (Array.isArray(expressions[i]) === true) {
           exp += expressions[i].join("");
           break;
         }
-      default:
         exp += `${exp}`;
     }
 

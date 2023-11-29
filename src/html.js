@@ -36,9 +36,9 @@ const html = ({ raw: literals }, ...expressions) => {
         break;
       case "object":
         if (expressions[i] === null) break;
-        if (Array.isArray(expressions[i])) {
-          exp += expressions[i].join("")
-          break
+        if (Array.isArray(expressions[i]) === true) {
+          exp += expressions[i].join("");
+          break;
         }
       default:
         exp += `${exp}`;

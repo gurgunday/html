@@ -26,14 +26,23 @@ const html = ({ raw: literals }, ...expressions) => {
 
   for (let i = 0; i < lastLitI; ++i) {
     let lit = literals[i];
-    let exp =
-      typeof expressions[i] === "string"
-        ? expressions[i]
-        : expressions[i] == null
-          ? ""
-          : Array.isArray(expressions[i]) === true
-            ? expressions[i].join("")
-            : `${expressions[i]}`;
+    let exp = "";
+
+    switch (typeof expressions[i]) {
+      case "string":
+        exp += expressions[i];
+        break;
+      case "undefined":
+        break;
+      case "object":
+        if (expressions[i] === null) break;
+        if (Array.isArray(expressions[i])) {
+          exp += expressions[i].join("")
+          break
+        }
+      default:
+        exp += `${exp}`;
+    }
 
     if (lit.length !== 0 && lit.charCodeAt(lit.length - 1) === 33) {
       lit = lit.slice(0, -1);

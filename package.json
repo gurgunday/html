@@ -14,7 +14,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "test": "node test/test.js"
+    "test": "node --experimental-test-coverage test/test.js"
   },
   "repository": {
     "type": "git",

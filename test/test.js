@@ -9,6 +9,15 @@ const descriptionUnsafe =
 const array1 = [1, 2, 3, 4, 5];
 const conditionTrue = true;
 const conditionFalse = false;
+const empty = "";
+
+test("renders correctly", (t) => {
+  assert.strictEqual(html({ raw: [] }, []), "");
+});
+
+test("renders correctly", (t) => {
+  assert.strictEqual(html`${empty}`, "");
+});
 
 test("renders correctly", (t) => {
   assert.strictEqual(html`Hey, ${username}!`, `Hey, ${username}!`);

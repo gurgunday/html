@@ -77,10 +77,10 @@ test("renders multiple html calls", (t) => {
   );
 });
 
-const obj = {};
-obj.toString = () => "Description of the object.";
-
 test("renders multiple html calls with different expression types", (t) => {
+  const obj = {};
+  obj.toString = () => "Description of the object.";
+
   assert.strictEqual(
     html`
       <p>

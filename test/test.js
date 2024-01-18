@@ -17,35 +17,35 @@ test("renders correctly", (t) => {
 test("renders safe content", (t) => {
   assert.strictEqual(
     html`<p>${descriptionSafe}</p>`,
-    "<p>This is a safe description.</p>"
+    "<p>This is a safe description.</p>",
   );
 });
 
 test("escapes unsafe output", (t) => {
   assert.strictEqual(
     html`<p>${descriptionUnsafe}</p>`,
-    `<p>&lt;script&gt;alert(&apos;This is an unsafe description.&apos;)&lt;/script&gt;</p>`
+    `<p>&lt;script&gt;alert(&apos;This is an unsafe description.&apos;)&lt;/script&gt;</p>`,
   );
 });
 
 test("escapes unsafe output", (t) => {
   assert.strictEqual(
     html`<p>${descriptionUnsafe}</p>`,
-    `<p>&lt;script&gt;alert(&apos;This is an unsafe description.&apos;)&lt;/script&gt;</p>`
+    `<p>&lt;script&gt;alert(&apos;This is an unsafe description.&apos;)&lt;/script&gt;</p>`,
   );
 });
 
 test("renders arrays", (t) => {
   assert.strictEqual(
     html`<p>${[descriptionSafe, descriptionUnsafe]}</p>`,
-    "<p>This is a safe description.&lt;script&gt;alert(&apos;This is an unsafe description.&apos;)&lt;/script&gt;</p>"
+    "<p>This is a safe description.&lt;script&gt;alert(&apos;This is an unsafe description.&apos;)&lt;/script&gt;</p>",
   );
 });
 
 test("bypass escaping", (t) => {
   assert.strictEqual(
     html`<p>!${[descriptionSafe, descriptionUnsafe]}</p>`,
-    "<p>This is a safe description.<script>alert('This is an unsafe description.')</script></p>"
+    "<p>This is a safe description.<script>alert('This is an unsafe description.')</script></p>",
   );
 });
 
@@ -53,7 +53,7 @@ test("renders wrapped html calls", (t) => {
   assert.strictEqual(
     // prettier-ignore
     html`<p>!${conditionTrue ? html`<strong>${descriptionUnsafe}</strong>` : ""}</p>`,
-    "<p><strong>&lt;script&gt;alert(&apos;This is an unsafe description.&apos;)&lt;/script&gt;</strong></p>"
+    "<p><strong>&lt;script&gt;alert(&apos;This is an unsafe description.&apos;)&lt;/script&gt;</strong></p>",
   );
 });
 
@@ -73,7 +73,7 @@ test("renders multiple html calls", (t) => {
         <em> 12345 </em>
         
       </p>
-    `
+    `,
   );
 });
 
@@ -98,6 +98,6 @@ test("renders multiple html calls with different expression types", (t) => {
         <em> 23456 </em><br />
         And also, false Description of the object.
       </p>
-    `
+    `,
   );
 });

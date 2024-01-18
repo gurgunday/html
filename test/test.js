@@ -14,7 +14,7 @@ test("renders correctly", (t) => {
   assert.strictEqual(html`Hey, ${username}!`, `Hey, ${username}!`);
 });
 
-test("renders safely", (t) => {
+test("renders safe content", (t) => {
   assert.strictEqual(
     html`<p>${descriptionSafe}</p>`,
     "<p>This is a safe description.</p>"

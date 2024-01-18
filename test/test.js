@@ -51,7 +51,8 @@ test("bypass escaping", (t) => {
 
 test("renders wrapped html calls", (t) => {
   assert.strictEqual(
-    html`<p>!${html`<strong>${descriptionUnsafe}</strong>`}</p>`,
+    // prettier-ignore
+    html`<p>!${conditionTrue ? html`<strong>${descriptionUnsafe}</strong>` : ""}</p>`,
     "<p><strong>&lt;script&gt;alert(&apos;This is an unsafe description.&apos;)&lt;/script&gt;</strong></p>"
   );
 });
@@ -60,8 +61,9 @@ test("renders multiple html calls", (t) => {
   assert.strictEqual(
     html`
       <p>
-        !${html`<strong> ${descriptionSafe} </strong>`}
-        !${html`<em> ${[1, 2, 3, 4, 5]} </em>`}
+        !${conditionFalse ? "" : html`<strong> ${descriptionSafe} </strong>`}
+        <em> ${array1} </em>
+        !${conditionFalse ? html`<em> ${array1} </em>` : ""}
       </p>
     `,
     // it should be formatted
@@ -69,18 +71,24 @@ test("renders multiple html calls", (t) => {
       <p>
         <strong> This is a safe description. </strong>
         <em> 12345 </em>
+        
       </p>
     `
   );
 });
+
+const obj = {};
+obj.toString = () => "Description of the object.";
 
 test("renders multiple html calls with different expression types", (t) => {
   assert.strictEqual(
     html`
       <p>
         !${conditionTrue ? html`<strong> ${descriptionSafe} </strong>` : ""}
-        !${conditionFalse ? "" : html`<em> ${array1.map((i) => i + 1)} </em>`}<br />
-        And also, ${descriptionUnsafe}
+        !${conditionFalse
+          ? ""
+          : html`<em> ${array1.map((i) => i + 1)} </em>`}<br />
+        And also, ${false} ${null}${undefined}${obj}
       </p>
     `,
     // it should be formatted
@@ -88,7 +96,7 @@ test("renders multiple html calls with different expression types", (t) => {
       <p>
         <strong> This is a safe description. </strong>
         <em> 23456 </em><br />
-        And also, &lt;script&gt;alert(&apos;This is an unsafe description.&apos;)&lt;/script&gt;
+        And also, false Description of the object.
       </p>
     `
   );

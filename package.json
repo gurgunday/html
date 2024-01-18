@@ -11,7 +11,10 @@
     "./*.js": "./src/*.js"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --experimental-test-coverage test/test.js"
   },
   "repository": {
     "type": "git",

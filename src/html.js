@@ -8,18 +8,18 @@ const escapeDictionary = {
 
 const escapeRegExp = new RegExp(
   `[${Object.keys(escapeDictionary).join("")}]`,
-  "gv",
+  "gu",
 );
 
 const escapeFunction = (key) => escapeDictionary[key];
 
 /**
  * @param {{ raw: string[] }} literals
- * @param {...*} expressions
+ * @param {...any} expressions
  * @returns {string}
  */
-const html = ({ raw: literals }, ...expressions) => {
-  const lastLitI = literals.length - 1;
+const html = (literals, ...expressions) => {
+  const lastLitI = literals.raw.length - 1;
   let acc = "";
 
   if (lastLitI === -1) {
@@ -27,26 +27,26 @@ const html = ({ raw: literals }, ...expressions) => {
   }
 
   for (let i = 0; i < lastLitI; ++i) {
-    let lit = literals[i];
+    let lit = literals.raw[i];
     let exp =
       typeof expressions[i] === "string"
         ? expressions[i]
         : expressions[i] == null
           ? ""
-          : Array.isArray(expressions[i]) === true
+          : Array.isArray(expressions[i])
             ? expressions[i].join("")
             : `${expressions[i]}`;
 
-    if (lit.length !== 0 && lit.charCodeAt(lit.length - 1) === 33) {
+    if (lit.length && lit.charCodeAt(lit.length - 1) === 33) {
       lit = lit.slice(0, -1);
-    } else if (exp.length !== 0) {
+    } else if (exp.length) {
       exp = exp.replace(escapeRegExp, escapeFunction);
     }
 
     acc += lit + exp;
   }
 
-  acc += literals[lastLitI];
+  acc += literals.raw[lastLitI];
 
   return acc;
 };
